@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Wedding Invitation</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .invitation-container {
+            max-width: 700px;
+            margin: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .invitation-container:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Hero Section with Image */
+        .hero {
+            height: 250px;
+            background-image: url('https://i.ibb.co/PhFpJCn/BG2.png'); /* Correct direct image URL */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Couple's Image */
+        .couple-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            margin-top: -60px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Invitation Content */
+        .content {
+            padding: 20px 30px;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 300;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 400;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Wedding Details */
+        .wedding-details {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .wedding-details p {
+            margin: 5px 0;
+            font-weight: 500;
+        }
+
+        /* RSVP Button */
+        .rsvp {
+            display: inline-block;
+            padding: 14px 40px;
+            background-color: #2d87f0;
+            color: #ffffff;
+            font-size: 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .rsvp:hover {
+            background-color: #2268b0;
+            transform: translateY(-5px);
+        }
+
+        /* RSVP Form */
+        .rsvp-form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .rsvp-form h3 {
+            font-size: 24px;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .rsvp-form input {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .rsvp-form button {
+            padding: 12px 30px;
+            font-size: 16px;
+            background-color: #2d87f0;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .rsvp-form button:hover {
+            background-color: #2268b0;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="invitation-container">
+    <!-- Hero Image Section -->
+    <div class="hero"></div>
+
+    <!-- Couple's Photo -->
+    <div class="content">
+        <img src="https://i.ibb.co/pfdhq6M/1099068650-dang-JCN117.jpg" class="couple-photo">
+        <h1 id="invitation-title">You're Invited</h1>
+        <h2>[Bride's Name] & [Groom's Name]</h2>
+        <p id="personal-message">We are thrilled to invite you to join us for our wedding day. We would love to have you celebrate this special occasion with us!</p>
+
+        <!-- Wedding Details -->
+        <div class="wedding-details">
+            <p>Date: [Wedding Date]</p>
+            <p>Venue: [Wedding Venue]</p>
+            <p>Time: [Wedding Time]</p>
+        </div>
+
+        <!-- RSVP Button -->
+        <a href="#" class="rsvp" id="rsvpButton">RSVP Now</a>
+
+        <!-- RSVP Form -->
+        <div id="rsvpForm" class="rsvp-form" style="display: none;">
+            <h3>Please Confirm Your Attendance</h3>
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <button type="submit" id="submitRSVP">Submit RSVP</button>
+        </div>
+
+        <!-- Footer Text -->
+        <div class="footer">
+            <p>We can't wait to celebrate with you!</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Function to get query parameters from URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Display the guest's name on the invitation
+    const guestName = getQueryParam('name');
+    if (guestName) {
+        const invitationTitle = document.getElementById('invitation-title');
+        const personalMessage = document.getElementById('personal-message');
+        
+        invitationTitle.textContent = `${guestName}, You're Invited!`;  // Personalized title
+        personalMessage.textContent = `Dear ${guestName}, we are thrilled to invite you to join us for our wedding day. We would love to have you celebrate this special occasion with us!`;  // Personalized message
+    }
+
+    // Show RSVP form on button click
+    document.getElementById('rsvpButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        const form = document.getElementById('rsvpForm');
+        form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
+    });
+
+    // RSVP submission
+    document.getElementById('submitRSVP').addEventListener('click', function() {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        
+        if (name && email) {
+            alert(`Thank you, ${name}, for your RSVP!`);
+            document.getElementById('rsvpForm').style.display = 'none';
+        } else {
+            alert('Please fill in both your name and email.');
+        }
+    });
+</script>
+
+</body>
+</html>
